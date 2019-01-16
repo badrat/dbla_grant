@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-family: monospace;
+    color: #0f0;
+    background-color: #000;
+    font-size: 12px;
 }
-
 a {
-  color: #00B7FF;
+    color: #0fc;
+}
+div, textarea, input, button, ul, li, select, label, form, header{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-variant-ligatures: none;
+}
+.holder{
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}ul{
+    margin-bottom: 32px;
+    li{
+        &:first-child{
+            list-style-type: none;
+        }
+    }
 }
