@@ -2,68 +2,22 @@
 <html>
 
 <head>
-    <title>
-        Database.la
-    </title>
+    <title>Database.la</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/lodash.min.js"></script>
     <script src="/javascripts/moment.min.js"></script>
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script src="/json/daysla-alldata.js"></script>
     <script>
-    
-    </script>
-    <script>
-        
         $(document).ready(function(){
 
-            function guid() {
-                var firstPart = (Math.random() * 46656) | 0;
-                var secondPart = (Math.random() * 46656) | 0;
-                firstPart = ("000" + firstPart.toString(36)).slice(-3);
-                secondPart = ("000" + secondPart.toString(36)).slice(-3);
-                return firstPart + secondPart;
-            }
-
-            function imageHandle(array, guid){
-                console.log("handle images..");
-                console.log(array);
-                console.log(guid);
-                if(array){
-                    $.each(array, function(k, val){
-                        $("#"+guid).append("<li>"+val.url+"</li>");
-                    });
-                }
-                
-                /*
-                $.each(images, function(k, val){
-                    $("#"+guid).append("<li>"+val.url+"</li>");
-                });
-                */
-            }
             
-            console.log(daysla);
-            console.log(guid());
-            var events = daysla.events;
-            $.each(events, function(key, value){
-                var images = value.photo_gallery;
-                var guid = 'e'+key;
-                $(".dump").append("<ul id="+guid+"><li class='title'>"+value.name+"</li></ul>");
-                imageHandle(images, guid);
-                
-            });
 
         });
     </script>
-</head>
-    <div class="holder">
-            Boilerplate<br><br>
-            <div class="dump"></div>
-    </div>
-    
+</head>    
 
 <body>
-    
+    <h1>A Blank Website</h1>
 </body>
 
 </html>
