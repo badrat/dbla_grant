@@ -2,7 +2,6 @@ var dotenv = require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var knex = require('knex')({
-<<<<<<< HEAD
   client: 'mysql',
   connection: {
     host: (process.env.sqlhost),
