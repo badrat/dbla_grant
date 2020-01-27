@@ -1,0 +1,23 @@
+{
+  "client" : "Boiler Test",
+  "schema" : {
+    "home" : {
+      "et" : "s",
+      "id" : "home",
+      "properties" : {
+        "title": {
+          "kind": "text",
+          "o": "1",
+          "type": "string",
+          "show": 1,
+          "width": "100%"
+        },
+        "main_content" : {
+          "kind" : "richtext",
+          "o" : "2",
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
