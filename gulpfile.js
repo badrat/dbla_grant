@@ -1,7 +1,10 @@
 var gulp = require('gulp');
 var gls = require('gulp-live-server');
+var uglify = require('gulp-uglify');
+var pipeline = require('readable-stream').pipeline;
 
 gulp.task( 'default', [ 'serve' ] );
+
 gulp.task('serve', function() {
 	//1. run your script as a server
 	var server = gls.new('app.js');
@@ -20,4 +23,12 @@ gulp.task('serve', function() {
 		server.start.bind(server)()
 	});
 
+});
+
+gulp.task('compress', function () {
+	return pipeline(
+		gulp.src('private/javascripts/*.js'),
+		uglify(),
+		gulp.dest('public/javascripts')
+	);
 });
