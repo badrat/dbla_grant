@@ -1,0 +1,193 @@
+{
+    "client": "Fairfax Cinema",
+    "schema": {
+        "films": {
+            "et": "m",
+            "id": "films",
+            "properties": {
+                "title": {
+                    "kind": "page_title",
+                    "o": 1
+                },
+                "slug": {
+                    "kind": "hidden",
+                    "o": 1
+                },
+                "format": {
+                    "kind": "text",
+                    "o": 2
+                },
+                "year": {
+                    "kind": "text",
+                    "o": 3
+                },
+                "duration": {
+                    "kind": "text",
+                    "o": 4
+                },
+                "director": {
+                    "kind": "text",
+                    "o": 5
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 6
+                },
+                "description": {
+                    "kind": "richtext",
+                    "o": 7
+                },
+                "description_html": {
+                    "kind": "hidden",
+                    "o": 7
+                },
+                "notes": {
+                    "kind": "longtext",
+                    "o": 8
+                }
+            },
+            "type": "object"
+        },
+        "times": {
+            "et": "m",
+            "id": "times",
+            "properties": {
+                "start_time": {
+                    "kind": "datetime",
+                    "o": 0
+                },
+                "ticket_url": {
+                    "kind": "text",
+                    "o": 1
+                },
+                "film": {
+                    "kind": "relation",
+                    "o": 2,
+                    "options": {
+                        "table": "films"
+                    }
+                },
+                "notes": {
+                    "kind": "longtext",
+                    "o": 3
+                }
+            },
+            "type": "object"
+        },
+        "series": {
+            "et": "m",
+            "id": "series",
+            "properties": {
+                "title": {
+                    "kind": "page_title",
+                    "o": 0
+                },
+                "slug": {
+                    "kind": "hidden",
+                    "o": 0
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 1
+                },
+                "films_included": {
+                    "kind": "relation",
+                    "o": 2,
+                    "options": {
+                        "table": "films"
+                    }
+                },
+                "start_date": {
+                    "kind": "datetime",
+                    "o": 3
+                },
+                "end_date": {
+                    "kind": "datetime",
+                    "o": 4
+                }
+            },
+            "type": "object"
+        },
+        "patio": {
+            "et": "s",
+            "id": "patio",
+            "properties": {
+                "title": {
+                    "kind": "text",
+                    "o": 0
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 1
+                },
+                "description": {
+                    "kind": "richtext",
+                    "o": 2
+                },
+                "description_html": {
+                    "kind": "hidden",
+                    "o": 2
+                }
+            },
+            "type": "object"
+        },
+        "bookstore": {
+            "et": "s",
+            "id": "bookstore",
+            "properties": {
+                "title": {
+                    "kind": "text",
+                    "o": 0
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 1
+                },
+                "description": {
+                    "kind": "richtext",
+                    "o": 2
+                },
+                "description_html": {
+                    "kind": "hidden",
+                    "o": 2
+                }
+            },
+            "type": "object"
+        },
+        "about": {
+            "et": "s",
+            "id": "about",
+            "properties": {
+                "title": {
+                    "kind": "text",
+                    "o": 0
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 1
+                },
+                "description": {
+                    "kind": "richtext",
+                    "o": 2
+                },
+                "description_html": {
+                    "kind": "hidden",
+                    "o": 2
+                },
+                "hours": {
+                    "kind": "longtext",
+                    "o": 3
+                },
+                "rental_email": {
+                    "kind": "text",
+                    "o": 3
+                },
+                "rental_phone": {
+                    "kind": "text",
+                    "o": 4
+                }
+            },
+            "type": "object"
+        }
+    }
+}
