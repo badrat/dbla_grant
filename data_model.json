@@ -1,23 +1,66 @@
 {
-  "client" : "Boiler Test",
-  "schema" : {
-    "home" : {
-      "et" : "s",
-      "id" : "home",
-      "properties" : {
-        "title": {
-          "kind": "text",
-          "o": "1",
-          "type": "string",
-          "show": 1,
-          "width": "100%"
+    "client": "Boiler",
+    "schema": {
+        "entries": {
+            "et": "m",
+            "id": "entries",
+            "properties": {
+                "id": {
+                    "kind": "hidden"
+                },
+                "title": {
+                    "kind": "page_title",
+                    "o": 1,
+                    "show": 1,
+                    "width": "50%"
+                },
+                "slug": {
+                    "kind": "hidden"
+                },
+                "description": {
+                    "kind": "longtext",
+                    "o": 2
+                },
+                "images": {
+                    "kind": "gallery",
+                    "o": 3
+                },
+                "date": {
+                    "kind": "datetime",
+                    "o": 4,
+                    "show": 1,
+                    "width": "25%"
+                },
+                "published": {
+                    "kind": "checkbox",
+                    "o": 5,
+                    "show": 1,
+                    "width": "25%"
+                }
+            }
         },
-        "main_content" : {
-          "kind" : "richtext",
-          "o" : "2",
-          "type" : "string"
+        "contact": {
+            "et": "s",
+            "id": "contact",
+            "properties": {
+                "id": {
+                    "kind": "hidden"
+                },
+                "title": {
+                    "kind": "text",
+                    "o": "1",
+                    "show": 1,
+                    "width": "100%"
+                },
+                "contact_info": {
+                    "kind": "richtext",
+                    "o": "2",
+                    "type": "string"
+                },
+                "contact_info_html": {
+                    "kind": "hidden"
+                }
+            }
         }
-      }
     }
-  }
 }
