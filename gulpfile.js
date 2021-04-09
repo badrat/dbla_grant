@@ -16,7 +16,10 @@ gulp.task('serve', function() {
         server.notify.bind(server)(file);
 	});
 	
-	gulp.watch('app.js', server.start.bind(server)); //restart my server
+	gulp.watch(['routes/index.js', 'routes/api.js'], function (file) {
+		server.stop();
+		server.start();
+	});
 
 	// Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
 	gulp.watch('app.js', function() {
