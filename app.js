@@ -47,5 +47,6 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+app.listen(process.env.port);
 console.log("boiler on 3100");
-app.listen(3100);
