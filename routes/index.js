@@ -11,7 +11,6 @@ var knex = require('knex')({
   }
 });
 var prod = process.env.production;
-var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,9 +22,8 @@ router.get('/route/:slug', function (req, res, next) {
   var results;
   knex('table').select('*').where('slug', routeslug).then(function (resp) {
     results = resp[0];
-    res.render('template', { title: title, results: results, moment: moment });
+    res.render('template', { title: title, results: results });
   });
 });
-var moment = require('moment');
 
 module.exports = router;
