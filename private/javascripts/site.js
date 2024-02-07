@@ -1,3 +1,7 @@
-console.log("the website!");
-var something = "my copy";
-console.log(something + " is not minified yet.");
+
+//when ready...
+$(document).ready(function() {
+    //attach dachshund.gif to follow the mouse cursor
+    
+
+});

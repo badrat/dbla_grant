@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Database.la</title>
+    <title>David Jacob Kramer</title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="en-US" />
@@ -10,25 +10,172 @@
     <meta name="google" content="notranslate">
     <meta name="thumbnail" content="/images/og_image_1200x630.png" />
     <meta property="og:image" content="/images/og_image_1200x630.png" />
-    <meta property="og:title" content="Page Title" />
-    <meta property="og:description" content="Page Description" />
+    <meta property="og:title" content="David Jacob Kramer" />
+    <meta property="og:description" content="Creative direction + strategy " />
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/site.js"></script>
     <script src="/javascripts/lodash.min.js"></script>
     <script src="/javascripts/moment.min.js"></script>
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
-   
+    <script src="/javascripts/projects.js"></script>
+    <script src="/javascripts/site.js"></script>
+
     <script>
         $(document).ready(function(){
             console.log("<%= prod %>");
+            console.log(projects);
+
+            // loop through projects and append to the ul
+            _.each(projects, function(project, index){
+                console.log(project.title);
+                $('.projectsholder').append('<li class="projectlink" data-id="'+index+'">' + project.title + '</li>');
+            });
+
+            //while hovering over .menu, add class 'on' to #daschund
+            $('.menu').hover(function(){
+                $('#dachshund').addClass('on');
+                $(document).mousemove(function (e) {
+                    $('#dachshund').css({
+                        left: e.pageX,
+                        top: e.pageY
+                    });
+                });
+            }, function(){
+                $('#dachshund').removeClass('on');
+            });
+
+            $('.projectlink').hover(function () {
+                $('.thumbpreview').addClass('on');
+                $(this).addClass("hovered");
+                $(document).mousemove(function (e) {
+                    $('.thumbpreview').css({
+                        left: e.pageX - 150,
+                        top: e.pageY - 150
+                    });
+                });
+            }, function () {
+                $('.projectlink').removeClass("hovered");
+                $('.thumbpreview').removeClass('on');
+                // give .box random width, height, and background color
+                var color = Math.floor(Math.random()*16777215).toString(16);
+                // give .box a random class of either 'horizontal' or 'vertical'
+                var random = Math.floor(Math.random()*2);
+                if (random == 0) {
+                    $('.box').addClass('horizontal');
+                    $('.box').removeClass('vertical');
+                } else {
+                    $('.box').addClass('vertical');
+                    $('.box').removeClass('horizontal');
+                }
+                $('.box').css({
+                    backgroundColor: "#" + color
+                });
+
+
+
+            });
+
+            //when clicking on a project, show the project details
+            $('.projectlink').click(function(){
+                console.log("clicked");
+                $(".projectlink").removeClass('selected');
+                var id = $(this).attr('data-id');
+                var project = projects[id];
+                $('.projecttitle').html(project.title+"<br><br>");
+                $('.projectdescription').html(project.description);
+                $(this).addClass('selected');
+            });
+
+            //when clicking a .link, show the corresponding page
+            $('.link').click(function(){
+                var target = $(this).attr('data-target');
+                console.log(target);
+                $('.pg').removeClass('on');
+                $('#' + target).addClass('on');
+                $('.link').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
         });
     </script>
 </head>    
 
 <body>
+    <div id="dachshund"></div>
     <div class="content">
-        <h1>Web 3</h1>
+        <b>David Jacob Kramer</b><br>
+        Creative direction + strategy<br><br><br>
+        <div class="menu">
+            <div class="link menu_projects selected" data-target="projectspg">Selected Projects</div>
+            <div class="menuspacer"> &nbsp;|&nbsp; </div>
+            <div class="link menu_bio" data-target="biopg">Bio</div>
+            <div class="menuspacer"> &nbsp;|&nbsp; </div>
+            <div class="link menu_contact" data-target="contactpg">Contact</div><br>
+        </div>
+
+        <div class="projectsviewer">
+            <div class="projecttitle"></div>
+            <div class="projectdescription"></div>
+            <div class="projectimage"></div>
+            <div class="close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        
+        <br><br>
+        <div id="projectspg" class="pg on">
+            <div class="thumbpreview">
+                <img src="../images/thumb_spotify.jpg">
+                <div class="box"></div>
+            </div>
+            <ul class="projectsholder"></ul>
+        </div>
+
+        <div id="biopg" class="pg">
+            <div class="text">
+                <p>
+                    Creative director / strategist working with global brands and local communities. Co-founder and creative director of
+                    Imprint Projects for 12 years — developed purpose-driven brand behaviors for companies like Google, Lego, Uniqlo,
+                    Levi’s, Sonos, Spotify, Soundcloud, and Vans, and nonprofits like The Bill & Melinda Gates Foundation and The Museum of
+                    Modern Art.
+                </p>
+                
+                <p>
+                    Multi-year platforms and integrated campaigns combined in-person experiences and digital content for global impact.
+                    Pioneers in building credible brand communities, our work championed by AdAge (Best Small Agency, Best Agency Culture,
+                    Best Experiential Agency), The Drum (Experience Agency of the Year, Brand Activation of the Year), D&AD (Wood Pencil for
+                    Branded Documentary), Digiday (Finalist Best Community Building Campaign, Finalist Most Innovative Independent Agency),
+                    and Campaign US BIG (Experiential Excellence).
+                </p>
+                
+                <p>
+                    Also founded the bookstore, Family, in Los Angeles, that ran for 15 years, specializing in artists' books, zines, and
+                    artist events. Write about art and culture for GQ, the Believer, as a guest editor for Paper Magazine, and authored the
+                    book Heads Together: Weed and the Underground Press Syndicate, 1965-1973 (Edition Patrick Frey).
+                </p>
+                
+                <p>
+                    More about Imprint Projects:
+                    "Imprint Projects' mission was to replace advertising with cultural production and dialogue.
+                    When businesses invite participation at the intersection of commerce and culture, we were able to transform brand
+                    perception in ways that is simply not possible with traditional advertising. We built connections with diverse creative
+                    communities, fostering relationships, and sparking conversations. Our approach balanced short-term business objectives
+                    with long-term brand equity."
+                </p>
+            </div>
+        </div>
+
+        <div id="contactpg" class="pg">
+            <div class="text"></div>
+        </div>
+
+        
+
+
+
     </div>
 </body>
 
