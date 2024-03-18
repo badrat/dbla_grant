@@ -47,6 +47,7 @@
             $('.projectlink').hover(function () {
                 $('.thumbpreview').addClass('on');
                 $(this).addClass("hovered");
+                var dataid = $(this).attr('data-id');
                 $(document).mousemove(function (e) {
                     $('.thumbpreview').css({
                         left: e.pageX - 150,
@@ -54,6 +55,7 @@
                     });
                 });
             }, function () {
+                var dataid = parseInt($(this).attr('data-id'));
                 $('.projectlink').removeClass("hovered");
                 $('.thumbpreview').removeClass('on');
                 // give .box random width, height, and background color
@@ -70,7 +72,7 @@
 
 
                 $('.box').css({
-                    'backgroundImage': 'url(' + projectsjs[0].thumbnail + ')'
+                    'backgroundImage': 'url(' + projectsjs[dataid].thumbnail + ')'
                 });
 
 
@@ -82,9 +84,9 @@
                 console.log("clicked");
                 $(".projectlink").removeClass('selected');
                 var id = $(this).attr('data-id');
-                var project = projects[id];
+                var project = projectsjs[id];
                 $('.projecttitle').html(project.title+"<br><br>");
-                $('.projectdescription').html(project.description);
+                $('.projectdescription').html(project.description_html);
                 $(this).addClass('selected');
             });
 
