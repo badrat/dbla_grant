@@ -1,66 +1,144 @@
 {
-    "client": "Boiler",
-    "schema": {
-        "entries": {
-            "et": "m",
-            "id": "entries",
-            "properties": {
-                "id": {
-                    "kind": "hidden"
-                },
-                "title": {
-                    "kind": "page_title",
-                    "o": 1,
-                    "show": 1,
-                    "width": "50%"
-                },
-                "slug": {
-                    "kind": "hidden"
-                },
-                "description": {
-                    "kind": "longtext",
-                    "o": 2
-                },
-                "images": {
-                    "kind": "gallery",
-                    "o": 3
-                },
-                "date": {
-                    "kind": "datetime",
-                    "o": 4,
-                    "show": 1,
-                    "width": "25%"
-                },
-                "published": {
-                    "kind": "checkbox",
-                    "o": 5,
-                    "show": 1,
-                    "width": "25%"
-                }
-            }
-        },
+  "client": "David",
+  "schema": {
+    "contact": {
+      "et": "s",
+      "id": "contact",
+      "properties": {
         "contact": {
-            "et": "s",
-            "id": "contact",
-            "properties": {
-                "id": {
-                    "kind": "hidden"
-                },
-                "title": {
-                    "kind": "text",
-                    "o": "1",
-                    "show": 1,
-                    "width": "100%"
-                },
-                "contact_info": {
-                    "kind": "richtext",
-                    "o": "2",
-                    "type": "string"
-                },
-                "contact_info_html": {
-                    "kind": "hidden"
-                }
-            }
+          "kind": "richtext",
+          "o": "2"
+        },
+        "contact_html": {
+          "kind": "hidden"
+        },
+        "id": {
+          "kind": "hidden"
+        },
+        "title": {
+          "kind": "page_title",
+          "o": "1",
+          "show": 1,
+          "width": "100%"
         }
+      }
+    },
+    "bio": {
+      "et": "s",
+      "id": "bio",
+      "properties": {
+        "bio": {
+          "kind": "richtext",
+          "o": "2"
+        },
+        "bio_html": {
+          "kind": "hidden"
+        },
+        "id": {
+          "kind": "hidden"
+        },
+        "title": {
+          "kind": "page_title",
+          "o": "1",
+          "show": 1,
+          "width": "100%"
+        },
+        "pic": {
+          "kind": "image",
+          "o": "3",
+          "note": "A pic of whatever the heck you want!"
+        }
+      }
+    },
+    "projects": {
+      "default_sort": "order",
+      "et": "m",
+      "id": "projects",
+      "properties": {
+        "client": {
+          "kind": "text",
+          "o": "8",
+          "show": 1,
+          "width": "15%"
+        },
+        "description": {
+          "kind": "richtext",
+          "o": "2"
+        },
+        "description_html": {
+          "kind": "hidden",
+          "o": "2"
+        },
+        "id": {
+          "kind": "hidden"
+        },
+        "images": {
+          "kind": "gallery",
+          "o": "6"
+        },
+        "order": {
+          "kind": "order",
+          "show": 1,
+          "width": "20%"
+        },
+        "published": {
+          "kind": "checkbox",
+          "o": "11",
+          "show": 1,
+          "width": "10%"
+        },
+        "slug": {
+          "kind": "hidden",
+          "o": "1"
+        },
+        "thumbnail": {
+          "kind": "image",
+          "note": "Used for index image",
+          "o": "3"
+        },
+        "thumbnail_text": {
+          "kind": "longtext",
+          "o": "5"
+        },
+        "title": {
+          "kind": "page_title",
+          "o": "1",
+          "show": 1,
+          "width": "40%"
+        },
+        "video": {
+          "kind": "text",
+          "note": "Use a Vimeo ID, or multiple Vimeo IDs separated by commas.",
+          "o": "7"
+        },
+        "year": {
+          "kind": "text",
+          "o": "9",
+          "show": 1,
+          "width": "15%"
+        }
+      }
+    },
+    "settings": {
+      "et": "s",
+      "id": "settings",
+      "properties": {
+        "background_color": {
+          "kind": "color",
+          "o": "2"
+        },
+        "id": {
+          "kind": "hidden"
+        },
+        "link_color": {
+          "kind": "color",
+          "o": "4"
+        },
+        "text_color": {
+          "kind": "color",
+          "o": "3"
+        }
+      }
     }
+  }
 }

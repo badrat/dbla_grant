@@ -49,4 +49,4 @@ app.use(function (err, req, res, next) {
 module.exports = app;
 
 app.listen(process.env.port);
-console.log("boiler on 3100");
+console.log("boiler on port " + process.env.port + " in " + process.env.NODE_ENV + " mode.");

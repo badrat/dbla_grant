@@ -17,16 +17,16 @@
     <script src="/javascripts/lodash.min.js"></script>
     <script src="/javascripts/moment.min.js"></script>
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script src="/javascripts/projects.js"></script>
     <script src="/javascripts/site.js"></script>
 
     <script>
         $(document).ready(function(){
             console.log("<%= prod %>");
-            console.log(projects);
+            var projectsjs = <%- JSON.stringify(projects) %>;
+            console.log(projectsjs);
 
             // loop through projects and append to the ul
-            _.each(projects, function(project, index){
+            _.each(projectsjs, function(project, index){
                 console.log(project.title);
                 $('.projectsholder').append('<li class="projectlink" data-id="'+index+'">' + project.title + '</li>');
             });
@@ -67,8 +67,10 @@
                     $('.box').addClass('vertical');
                     $('.box').removeClass('horizontal');
                 }
+
+
                 $('.box').css({
-                    backgroundColor: "#" + color
+                    'backgroundImage': 'url(' + projectsjs[0].thumbnail + ')'
                 });
 
 
@@ -104,7 +106,7 @@
     <div id="dachshund"></div>
     <div class="content">
         <b>David Jacob Kramer</b><br>
-        Creative direction + strategy<br><br><br>
+        <b>Creative direction + strategy</b><br><br><br>
         <div class="menu">
             <div class="link menu_projects selected" data-target="projectspg">Selected Projects</div>
             <div class="menuspacer"> &nbsp;|&nbsp; </div>
@@ -172,6 +174,15 @@
             <div class="text"></div>
         </div>
 
+
+        <% projects.forEach(function(project) { %>
+        <li>
+            <a href="<%= project.slug %>">
+                <div class="gblock" style="background-image: url(<%= project.thumbnail %>)"></div>
+                
+            </a>
+        </li>
+        <% }); %>
         
 
 
