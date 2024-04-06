@@ -48,11 +48,36 @@
                 $('.thumbpreview').addClass('on');
                 $(this).addClass("hovered");
                 var dataid = $(this).attr('data-id');
+                var thumbScale = $('#thumbScale').val();
+                var thumbWidth = thumbScale;
+                var thumbHeight = thumbScale*.768;
+
+                // create random thumbnail_aspect_ratio
+                projectsjs[dataid].thumbnail_aspect_ratio = Math.random() * 2;
+
+                // check thumbnail aspect ratio
+                if (projectsjs[dataid].thumbnail_aspect_ratio > 1) {
+                    $('.box').addClass('horizontal');
+                    $('.box').removeClass('vertical');
+                } else {
+                    $('.box').addClass('vertical');
+                    $('.box').removeClass('horizontal');
+                }
+
                 $(document).mousemove(function (e) {
+
+                    var halfWidth = thumbScale / 2;
+                    var halfHeight = thumbHeight / 2;
+
                     $('.thumbpreview').css({
-                        left: e.pageX - 150,
-                        top: e.pageY - 150
+                        left: e.pageX,
+                        top: e.pageY,
+                        'width': thumbWidth + 'vw',
+                        'height': thumbHeight + 'vw'
                     });
+
+
+
                 });
             }, function () {
                 var dataid = parseInt($(this).attr('data-id'));
@@ -76,7 +101,12 @@
                 });
 
 
+            });
 
+            //when a slider in the editor is moved, the relevant readout should so its value
+            $('.slider').on('input', function(){
+                var value = $(this).val();
+                $(this).next('.readout').html(value);
             });
 
             //when clicking on a project, show the project details
@@ -87,6 +117,15 @@
                 var project = projectsjs[id];
                 $('.projecttitle').html(project.title+"<br><br>");
                 $('.projectdescription').html(project.description_html);
+                console.log(project);
+                let images = JSON.parse(project.images);
+                console.log(images);
+                $(".projectimages").html("");
+                images.forEach(function(image){
+                    $(".projectimages").append('<div class="projectthumb"><img src="'+image.s1600+'"></div>');
+                });
+
+
                 $(this).addClass('selected');
             });
 
@@ -98,6 +137,36 @@
                 $('#' + target).addClass('on');
                 $('.link').removeClass('selected');
                 $(this).addClass('selected');
+            });
+
+            //listen to fontSize slider, and change the font size of eeverything accordingly as it slides
+            $('#fontSize').on('input', function(){
+                var value = $(this).val();
+                $('.content').css('font-size', value + 'px');
+
+                //calculate line-height as 120% of font-size, but round up to the nearest whole number
+                var lineHeight = Math.ceil(value * 1.2);
+                $('.content').css('line-height', lineHeight + 'px');
+
+
+            });
+
+            //sync projectThumbWidth slider with the width of .projectthumb
+            $('#projectThumbWidth').on('input', function(){
+                var value = $(this).val();
+                $('.projectthumb').css('width', value + '%');
+            });
+
+            //use panelwidth to determine width of projectspg and projectsviewer
+            $('#panelWidth').on('input', function(){
+                var value = $(this).val();
+                var width = value + '%';
+                console.log(width);
+                let projectspgwidth = "calc(" + width + "%" + " - 64px)";
+                console.log(projectspgwidth);
+                $('.pg').css('width',  value + '%');
+                $('.projectsviewer').css('width', (100 - value) + '%');
+                $('.projectsviewer').css('left', value + '%');
             });
 
         });
@@ -119,6 +188,7 @@
 
         <div class="projectsviewer">
             <div class="projecttitle"></div>
+            <div class="projectimages"></div>
             <div class="projectdescription"></div>
             <div class="projectimage"></div>
             <div class="close">
@@ -174,6 +244,36 @@
 
         <div id="contactpg" class="pg">
             <div class="text"></div>
+        </div>
+
+        <div class="editor">
+            <ul>
+                <li>
+                    <label for="thumbScale">Thumb Scale</label>
+                    <input type="range" min="10" max="100" value="50" class="slider" id="thumbScale">
+                    <div class="readout"></div>
+                </li>
+                <li>
+                    <label for="panelWidth">Panel Width</label>
+                    <input type="range" min="10" max="100" value="50" class="slider" id="panelWidth">
+                    <div class="readout"></div>
+                </li>
+                <li>
+                    <label for="fontSize">Font</label>
+                    <input type="range" min="8" max="128" value="24" class="slider" id="fontSize">
+                    <div class="readout"></div>
+                </li>
+                <li>
+                    <label for="projectThumbWidth">Project Images</label>
+                    <input type="range" min="10" max="100" value="25" class="slider" id="projectThumbWidth">
+                    <div class="readout"></div>
+                </li>
+                <li>
+
+                </li>
+            </ul>
+            <!-- a slider for percentage size of thumbnail, min 10% max 100%-->
+            
         </div>
 
 
