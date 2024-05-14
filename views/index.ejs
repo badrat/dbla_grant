@@ -121,10 +121,16 @@
                 let images = JSON.parse(project.images);
                 console.log(images);
                 $(".projectimages").html("");
+                $(".projectimage").html("");
                 images.forEach(function(image){
-                    $(".projectimages").append('<div class="projectthumb"><img src="'+image.s1600+'"></div>');
+                // if it's the first image, show it as the main image
+                if (image.s1600 == images[0].s1600) {
+                    $('.projectimage').append('<img src="' + image.s1600 + '">');
+                }else{
+                    $(".projectimages").append('<div class="projectthumb"><img src="' + image.s1600 + '"></div>');
+                }
+                    
                 });
-
 
                 $(this).addClass('selected');
             });
@@ -175,22 +181,34 @@
 
 <body>
     <div id="dachshund"></div>
-    <div class="content">
+
+    <div class="left">
         <b>David Jacob Kramer</b><br>
         <b>Creative direction + strategy</b><br><br><br>
         <div class="menu">
             <div class="link menu_projects selected" data-target="projectspg">Selected Projects</div>
-            <div class="menuspacer"> &nbsp;|&nbsp; </div>
+            <div class="menuspacer"> &nbsp; &nbsp; </div>
             <div class="link menu_bio" data-target="biopg">Bio</div>
-            <div class="menuspacer"> &nbsp;|&nbsp; </div>
+            <div class="menuspacer"> &nbsp; &nbsp; </div>
             <div class="link menu_contact" data-target="contactpg">Contact</div><br>
         </div>
+        <div id="projectspg" class="pg on">
+            <div class="thumbpreview">
+                <img src="../images/thumb_spotify.jpg">
+                <div class="box"></div>
+            </div>
+            <ul class="projectsholder"></ul>
+        </div>
+    </div>
+
+    <div class="content"
 
         <div class="projectsviewer">
             <div class="projecttitle"></div>
-            <div class="projectimages"></div>
-            <div class="projectdescription"></div>
             <div class="projectimage"></div>
+            
+            <div class="projectdescription"></div>
+            <div class="projectimages"></div>
             <div class="close">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 6L6 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -200,13 +218,7 @@
         </div>
         
         <br><br>
-        <div id="projectspg" class="pg on">
-            <div class="thumbpreview">
-                <img src="../images/thumb_spotify.jpg">
-                <div class="box"></div>
-            </div>
-            <ul class="projectsholder"></ul>
-        </div>
+        
 
         <div id="biopg" class="pg">
             <div class="text">
