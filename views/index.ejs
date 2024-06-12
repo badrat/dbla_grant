@@ -117,8 +117,8 @@
                 var id = $(this).attr('data-id');
                 var project = projectsjs[id];
                 $('.projecttitle').html(project.title+"<br><br>");
-                $('.theask .copy').html(project.the_ask_html);
-                $('.theanswer .copy').html(project.the_answer_html);
+                $('.theask .copy').html(project.ask_html);
+                $('.theanswer .copy').html(project.answer_html);
                 $('.projectdescription .copy').html(project.description_html);
                 console.log(project);
                 let images = JSON.parse(project.images);
@@ -126,14 +126,32 @@
                 $(".projectimages").html("");
                 $(".projectimage").html("");
                 images.forEach(function(image){
-                // if it's the first image, show it as the main image
-                if (image.s1600 == images[0].s1600) {
-                    $('.projectimage').append('<img src="' + image.s1600 + '">');
-                }else{
-                    $(".projectimages").append('<div class="projectthumb"><img src="' + image.s1600 + '"></div>');
-                }
-                    
+                    console.log(image);
+                    // if it's the first image, show it as the main image
+                    if (image.s1600 == images[0].s1600) {
+                        if (image.format == "image/gif") {
+                            $('.projectimage').append('<img src="' + image.url + '">');
+                        }else{
+                            $('.projectimage').append('<img src="' + image.s1600 + '">');
+                        }
+                    }else{
+                        if(image.format == "image/gif"){
+                            $(".projectimages").append('<div class="projectthumb"><img src="' + image.url + '"></div>');
+                        }else{
+                            $(".projectimages").append('<div class="projectthumb"><img src="' + image.s1600 + '"></div>');
+                        }
+                    } 
                 });
+
+                //let videos be project.videos array parsed by comma separation
+                let videos = project.video.split(",");
+                console.log(videos);
+                videos.forEach(function(video){
+                    //embed vimdeo video using just the id
+                    $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
+                });
+
+
 
                 $(this).addClass('selected');
             });
@@ -228,19 +246,22 @@
             <div class="projectimage"></div>
 
             <div class="theask">
-                <span>The Ask</span>
+                <h3>The Ask</h3>
                 <div class="copy"></div>
             </div>
-            
+
             <div class="theanswer">
-                <span>The Answer</span>
+                <h3>The Answer</h3>
                 <div class="copy"></div>
             </div>
             
             <div class="projectdescription">
-                <span>The Project</span>
+                <h3>The Project</h3>
                 <div class="copy"></div>
             </div>
+
+            <div class="projectvideos"></div>
+
             <div class="projectimages"></div>
             <div class="close">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

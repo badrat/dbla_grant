@@ -80,19 +80,19 @@
           "show": 1,
           "width": "15%"
         },
-        "the_ask": {
+        "ask": {
           "kind": "richtext",
           "o": "20"
         },
-        "the_ask_html": {
+        "ask_html": {
           "kind": "hidden",
           "o": "20"
         },
-        "the_answer": {
+        "answer": {
           "kind": "richtext",
           "o": "30"
         },
-        "the_answer_html": {
+        "answer_html": {
           "kind": "hidden",
           "o": "30"
         },
