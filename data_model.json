@@ -55,26 +55,61 @@
       "et": "m",
       "id": "projects",
       "properties": {
+        "slug": {
+          "kind": "hidden",
+          "o": "5"
+        },
+        "thumbnail": {
+          "kind": "image",
+          "note": "Used for index image",
+          "o": "6"
+        },
+        "thumbnail_text": {
+          "kind": "longtext",
+          "o": "7"
+        },
+        "title": {
+          "kind": "page_title",
+          "o": "8",
+          "show": 1,
+          "width": "40%"
+        },
         "client": {
           "kind": "text",
-          "o": "8",
+          "o": "10",
           "show": 1,
           "width": "15%"
         },
+        "the_ask": {
+          "kind": "richtext",
+          "o": "20"
+        },
+        "the_ask_html": {
+          "kind": "hidden",
+          "o": "20"
+        },
+        "the_answer": {
+          "kind": "richtext",
+          "o": "30"
+        },
+        "the_answer_html": {
+          "kind": "hidden",
+          "o": "30"
+        },
         "description": {
           "kind": "richtext",
-          "o": "2"
+          "o": "40"
         },
         "description_html": {
           "kind": "hidden",
-          "o": "2"
+          "o": "40"
         },
         "id": {
           "kind": "hidden"
         },
         "images": {
           "kind": "gallery",
-          "o": "6"
+          "o": "50"
         },
         "order": {
           "kind": "order",
@@ -83,37 +118,18 @@
         },
         "published": {
           "kind": "checkbox",
-          "o": "11",
+          "o": "60",
           "show": 1,
           "width": "10%"
-        },
-        "slug": {
-          "kind": "hidden",
-          "o": "1"
-        },
-        "thumbnail": {
-          "kind": "image",
-          "note": "Used for index image",
-          "o": "3"
-        },
-        "thumbnail_text": {
-          "kind": "longtext",
-          "o": "5"
-        },
-        "title": {
-          "kind": "page_title",
-          "o": "1",
-          "show": 1,
-          "width": "40%"
         },
         "video": {
           "kind": "text",
           "note": "Use a Vimeo ID, or multiple Vimeo IDs separated by commas.",
-          "o": "7"
+          "o": "70"
         },
         "year": {
           "kind": "text",
-          "o": "9",
+          "o": "80",
           "show": 1,
           "width": "15%"
         }

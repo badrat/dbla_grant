@@ -113,10 +113,13 @@
             $('.projectlink').click(function(){
                 console.log("clicked");
                 $(".projectlink").removeClass('selected');
+                $(".projectsviewer").addClass('on');
                 var id = $(this).attr('data-id');
                 var project = projectsjs[id];
                 $('.projecttitle').html(project.title+"<br><br>");
-                $('.projectdescription').html(project.description_html);
+                $('.theask .copy').html(project.the_ask_html);
+                $('.theanswer .copy').html(project.the_answer_html);
+                $('.projectdescription .copy').html(project.description_html);
                 console.log(project);
                 let images = JSON.parse(project.images);
                 console.log(images);
@@ -145,6 +148,20 @@
                 $(this).addClass('selected');
             });
 
+            //when clicking on a dynamically generated projecthumb image, show it in the viewer
+            $(document).on('click', '.projectthumb', function(){
+                console.log("clicked");
+                var src = $(this).find('img').attr('src');
+                console.log(src);
+                $('.viewer').html('<img src="' + src + '">');
+                $('.viewer').addClass('on');
+            });
+
+            $(document).on('click', '.viewer', function(){
+                $('.viewer').removeClass('on');
+                $('.viewer').empty();
+            });
+
             //listen to fontSize slider, and change the font size of eeverything accordingly as it slides
             $('#fontSize').on('input', function(){
                 var value = $(this).val();
@@ -164,22 +181,25 @@
             });
 
             //use panelwidth to determine width of projectspg and projectsviewer
-            $('#panelWidth').on('input', function(){
-                var value = $(this).val();
-                var width = value + '%';
-                console.log(width);
-                let projectspgwidth = "calc(" + width + "%" + " - 64px)";
-                console.log(projectspgwidth);
-                $('.pg').css('width',  value + '%');
-                $('.projectsviewer').css('width', (100 - value) + '%');
-                $('.projectsviewer').css('left', value + '%');
-            });
+            // $('#panelWidth').on('input', function(){
+            //     var value = $(this).val();
+            //     var width = value + '%';
+            //     console.log(width);
+            //     let projectspgwidth = "calc(" + width + "%" + " - 64px)";
+            //     console.log(projectspgwidth);
+            //     $('.pg').css('width',  value + '%');
+            //     $('.projectsviewer').css('width', (100 - value) + '%');
+            //     $('.projectsviewer').css('left', value + '%');
+            // });
 
         });
     </script>
 </head>    
 
 <body>
+
+    <div class="viewer"></div>
+
     <div id="dachshund"></div>
 
     <div class="left">
@@ -201,13 +221,26 @@
         </div>
     </div>
 
-    <div class="content"
+    <div class="content">
 
-        <div class="projectsviewer">
+        <div id="projectsviewer" class="projectsviewer pg">
             <div class="projecttitle"></div>
             <div class="projectimage"></div>
+
+            <div class="theask">
+                <span>The Ask</span>
+                <div class="copy"></div>
+            </div>
             
-            <div class="projectdescription"></div>
+            <div class="theanswer">
+                <span>The Answer</span>
+                <div class="copy"></div>
+            </div>
+            
+            <div class="projectdescription">
+                <span>The Project</span>
+                <div class="copy"></div>
+            </div>
             <div class="projectimages"></div>
             <div class="close">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,9 +249,6 @@
                 </svg>
             </div>
         </div>
-        
-        <br><br>
-        
 
         <div id="biopg" class="pg">
             <div class="text">
@@ -228,7 +258,7 @@
                     Levi’s, Sonos, Spotify, Soundcloud, and Vans, and nonprofits like The Bill & Melinda Gates Foundation and The Museum of
                     Modern Art.
                 </p>
-                
+
                 <p>
                     Multi-year platforms and integrated campaigns combined in-person experiences and digital content for global impact.
                     Pioneers in building credible brand communities, our work championed by AdAge (Best Small Agency, Best Agency Culture,
@@ -236,13 +266,13 @@
                     Branded Documentary), Digiday (Finalist Best Community Building Campaign, Finalist Most Innovative Independent Agency),
                     and Campaign US BIG (Experiential Excellence).
                 </p>
-                
+
                 <p>
                     Also founded the bookstore, Family, in Los Angeles, that ran for 15 years, specializing in artists' books, zines, and
                     artist events. Write about art and culture for GQ, the Believer, as a guest editor for Paper Magazine, and authored the
                     book Heads Together: Weed and the Underground Press Syndicate, 1965-1973 (Edition Patrick Frey).
                 </p>
-                
+
                 <p>
                     More about Imprint Projects:
                     "Imprint Projects' mission was to replace advertising with cultural production and dialogue.
@@ -257,6 +287,11 @@
         <div id="contactpg" class="pg">
             <div class="text"></div>
         </div>
+        
+        <br><br>
+        
+
+        
 
         <div class="editor">
             <ul>
