@@ -28,7 +28,7 @@
             // loop through projects and append to the ul
             _.each(projectsjs, function(project, index){
                 console.log(project.title);
-                $('.projectsholder').append('<li class="projectlink" data-id="'+index+'">' + project.title + '</li>');
+                $('.projectsholder').append('<li class="projectlink" data-id="'+index+'" data-slug="'+project.slug+'">' + project.title + '</li>');
             });
 
             //while hovering over .menu, add class 'on' to #daschund
@@ -44,10 +44,40 @@
                 $('#dachshund').removeClass('on');
             });
 
+
+            // populate thumbpreview with boxes of each thumbnail image available   
+            _.each(projectsjs, function(project, index){
+                //create box element for each project with the thumbnail as the background image
+                $('.thumbpreview').append('<div class="box ' + project.slug + '" style="background-image: url(' + project.thumbnail + ')"></div>');
+
+
+                // create random thumbnail_aspect_ratio
+                projectsjs[index].thumbnail_aspect_ratio = Math.random() * 2;
+
+                // check thumbnail aspect ratio
+                if (projectsjs[index].thumbnail_aspect_ratio > 1) {
+                    // adjust this specific box
+                    $('.' + project.slug).addClass('horizontal');
+                    $('.' + project.slug).removeClass('vertical');
+                } else {
+                    // adjust this specific box
+                    $('.' + project.slug).addClass('vertical');
+                    $('.' + project.slug).removeClass('horizontal');
+                }
+
+                $('.' + project.slug).css({
+                    'backgroundImage': 'url(' + project.thumbnail + ')'
+                });
+            });
+
+
+            //when hovering over a projectlink, show the thumbpreview
+
             $('.projectlink').hover(function () {
                 $('.thumbpreview').addClass('on');
                 $(this).addClass("hovered");
                 var dataid = $(this).attr('data-id');
+                var dataslug = $(this).attr('data-slug');
                 var thumbScale = $('#thumbScale').val();
                 var thumbWidth = thumbScale;
                 var thumbHeight = thumbScale*.768;
@@ -64,14 +94,26 @@
                     $('.box').removeClass('horizontal');
                 }
 
+                $(".box").removeClass("top");
+                $("." + dataslug).addClass('on');
+                $("." + dataslug).addClass('top');
+
                 $(document).mousemove(function (e) {
 
                     var halfWidth = thumbScale / 2;
                     var halfHeight = thumbHeight / 2;
 
+                    // $('.thumbpreview').css({
+                    //     left: e.pageX,
+                    //     top: e.pageY,
+                    //     'width': thumbWidth + 'vw',
+                    //     'height': thumbHeight + 'vw'
+                    // });
+
                     $('.thumbpreview').css({
-                        left: e.pageX,
-                        top: e.pageY,
+                        //left: (e.clientX - halfWidth) + 'px',  // Changed to clientX and adjust for half the width
+                        left: -256 + e.clientX + 'px',
+                        top: (e.clientY - halfHeight) + 'px',  // Changed to clientY and adjust for half the height
                         'width': thumbWidth + 'vw',
                         'height': thumbHeight + 'vw'
                     });
@@ -81,10 +123,13 @@
                 });
             }, function () {
                 var dataid = parseInt($(this).attr('data-id'));
+                var dataslug = parseInt($(this).attr('data-slug'));
                 $('.projectlink').removeClass("hovered");
                 $('.thumbpreview').removeClass('on');
-                // give .box random width, height, and background color
-                var color = Math.floor(Math.random()*16777215).toString(16);
+                $('.box').removeClass('on');
+                console.log("mouseout");
+
+
                 // give .box a random class of either 'horizontal' or 'vertical'
                 var random = Math.floor(Math.random()*2);
                 if (random == 0) {
@@ -95,11 +140,7 @@
                     $('.box').removeClass('horizontal');
                 }
 
-
-                $('.box').css({
-                    'backgroundImage': 'url(' + projectsjs[dataid].thumbnail + ')'
-                });
-
+                
 
             });
 
@@ -148,6 +189,7 @@
                 console.log(videos);
                 videos.forEach(function(video){
                     //embed vimdeo video using just the id
+                    $(".projectvideos").html("");
                     $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
                 });
 
@@ -224,7 +266,7 @@
         <b>David Jacob Kramer</b><br>
         <b>Creative direction + strategy</b><br><br><br>
         <div class="menu">
-            <div class="link menu_projects selected" data-target="projectspg">Selected Projects</div>
+            <div class="link menu_projects selected" data-target="projectspg">Projects</div>
             <div class="menuspacer"> &nbsp; &nbsp; </div>
             <div class="link menu_bio" data-target="biopg">Bio</div>
             <div class="menuspacer"> &nbsp; &nbsp; </div>
@@ -258,6 +300,11 @@
             <div class="projectdescription">
                 <h3>The Project</h3>
                 <div class="copy"></div>
+            </div>
+
+
+            <div class="projectmedia">
+                <h3>Media</h3>
             </div>
 
             <div class="projectvideos"></div>
@@ -318,7 +365,7 @@
             <ul>
                 <li>
                     <label for="thumbScale">Thumb Scale</label>
-                    <input type="range" min="10" max="100" value="50" class="slider" id="thumbScale">
+                    <input type="range" min="10" max="100" value="70" class="slider" id="thumbScale">
                     <div class="readout"></div>
                 </li>
                 <li>

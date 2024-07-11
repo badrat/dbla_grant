@@ -27,14 +27,22 @@ body {
     font-family     : "GreyLLWeb-Regular", sans-serif;
     color           : #000;
     background-color: #fff;
-    font-size       : 20px;
+    font-size       : 18px;
     line-height: 26px;
     margin          : 0;
     padding         : 0;
     position: relative;
     width: 100%;
     float: left;
-}a {
+} 
+h6 {
+    font-size: 18px;
+    line-height: 26px;
+    padding: 0 0 0 4px;
+    margin: 0;
+    font-weight: normal;
+
+} a {
     color: #00f;
 }b {
     font-weight: 600;
@@ -107,24 +115,63 @@ body {
         display: block;
         clear  : both;
         margin-bottom: 16px;
+        p{
+            margin: 12px 0 24px 0;
+        }
     }
 
-    .theask h3, .theanswer h3, .projectdescription h3{
+    .theask h3, .theanswer h3, .projectdescription h3, .projectmedia h3, .projectcredits h3{
         padding: 0;
         margin: 0;
         font-weight: bold;
-        font-size: 28px;
-        line-height: 32px;
         float: left;
         clear: both;
+        font-size: 18px;
+        line-height: 26px;
     }.theask{
         display: block;
         float: left;
+        font-size: 28px;
+        line-height: 32px;
     }.theanswer {
         display: block;
         float  : left;
+        font-size: 28px;
+        line-height: 32px;
     }
-    
+
+    .projectcredits{
+        float: left;
+        display: block;
+        clear: both;
+        .copy{
+            float: left;
+            display: block;
+            width: 100%;
+            font-size: 12px;
+            line-height: 12px;
+        }
+    }
+
+    .projectmedia{
+        float: left;
+        display: block;
+        clear: both;
+        width: 100%;
+    }
+
+    .projectvideos{
+        float: left;
+        display: block;
+        overflow: auto;
+        width: 100%;
+        padding-top: 16px;
+    }.projectimages{
+        float: left;
+        display: block;
+        overflow: auto;
+        width: 100%;
+    }
     
     .projectimages {
         display: grid;
@@ -132,7 +179,7 @@ body {
         gap: 10px; /* Adjust the space between the grid items */
     }.projectthumb {
         width: 100%;
-        aspect-ratio: 1 / 1; /* Makes the cell square */
+        aspect-ratio: 1 / .75; /* Makes the cell square */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -141,8 +188,8 @@ body {
             opacity: 0.8;
         }
     }.projectthumb img {
-        width: 100%;
-        height: 100%;
+        width: 80%;
+        height: 80%;
         object-fit: contain; /* Ensures the image covers the area, maintaining aspect ratio */
     }
 
@@ -197,6 +244,10 @@ body {
     float: left;
     clear: both;
     list-style: none;
+    background-color: #fff;
+    width: 100%;
+    padding: 0 16px;
+    height: 26px;
     &.selected{
         font-weight: 600;
     }
@@ -204,7 +255,7 @@ body {
         cursor : pointer;
     }&.hovered{
         z-index: 50;
-        color: #fff;
+        color: #000;
         //mix-blend-mode: exclusion;
     }
 }.menuspacer{
@@ -244,22 +295,24 @@ body {
     height: 100vh;
     position: fixed;
     top: 32px;
-    left: 64px;
+    left: 32px;
 }
 
 
 .thumbpreview{
     position: absolute;
+    // width: 75vw;
+    // height: 57.6vw;
     width: 50vw;
     height: 38.4vw;
     //border: 1px #000 solid;
     top: 0;
-    right: 0;
+    //right: 0;
     pointer-events: none;
     z-index: 5;
     display: none;
     //border: 1px solid #f00;
-    translate: -50% -50%;
+    translate: 0 -25%;
     img{
         width: 100%;
         height: 100%;
@@ -275,8 +328,15 @@ body {
         width: 100%;
         height: 100%;
         transform: translateY(-50%);
+        z-index: 1;
+        opacity: 0;
         //border: 1px solid #00f;
+        &.top {
+            opacity: 1;
+            z-index: 1000;
+        }
     }
+    
     &.on{
         display: block;
     }
