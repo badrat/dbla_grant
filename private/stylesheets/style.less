@@ -120,6 +120,10 @@ h6 {
         }
     }
 
+    .projectsviewer{
+        max-width: 700px;
+    }
+
     .theask h3, .theanswer h3, .projectdescription h3, .projectmedia h3, .projectcredits h3{
         padding: 0;
         margin: 0;
@@ -127,17 +131,29 @@ h6 {
         float: left;
         clear: both;
         font-size: 18px;
+        // font-size: 12px;
         line-height: 26px;
-    }.theask{
+        background-color: none !important;
+        width: 100%;
+    }.theask, .theanswer{
+        // background-color: #000;
+        // color: #fff;
         display: block;
         float: left;
-        font-size: 28px;
-        line-height: 32px;
+        font-size: 13px;
+        line-height: 26px;
+        display: inline;
+        width: 350px;
+        padding: 0;
+        text-align: left;
+        h3{
+            text-align: left;
+        }
+    }.theask{
+        padding-right: 16px;
     }.theanswer {
-        display: block;
-        float  : left;
-        font-size: 28px;
-        line-height: 32px;
+        padding-left: 16px;
+        //border-left: 1px solid #000;
     }
 
     .projectcredits{
@@ -185,7 +201,10 @@ h6 {
         justify-content: center;
         &:hover{
             cursor: pointer;
-            opacity: 0.8;
+            //opacity: 0.8;
+            img{
+                filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(0deg);
+            }
         }
     }.projectthumb img {
         width: 80%;
@@ -244,7 +263,7 @@ h6 {
     float: left;
     clear: both;
     list-style: none;
-    background-color: #fff;
+  //  background-color: #fff;
     width: 100%;
     padding: 0 16px;
     height: 26px;

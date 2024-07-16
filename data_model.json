@@ -104,6 +104,18 @@
           "kind": "hidden",
           "o": "40"
         },
+        "credits": {
+          "kind": "repeatable",
+          "o": "45",
+          "options": {
+              "credit_title": {
+                  "kind": "text"
+              },
+              "credit_name": {
+                  "kind": "text"
+              }
+          }
+        },
         "id": {
           "kind": "hidden"
         },
