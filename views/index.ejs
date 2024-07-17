@@ -189,6 +189,8 @@
                 let videos = project.video.split(",");
                 console.log(videos);
                 videos.forEach(function(video){
+                    //remove space from video
+                    video = video.replace(/\s/g, '');
                     //embed vimdeo video using just the id
                     $(".projectvideos").html("");
                     $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
@@ -304,9 +306,9 @@
             </div>
 
 
-            <div class="projectmedia">
+            <!-- <div class="projectmedia">
                 <h3>Media</h3>
-            </div>
+            </div> -->
 
             <div class="projectvideos"></div>
 
