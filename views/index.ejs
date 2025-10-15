@@ -32,7 +32,7 @@
             });
 
             //while hovering over .menu, add class 'on' to #daschund
-            $('.menu').hover(function(){
+            $('.menu, .projectlink, .projectthumb, .projectthumb img, .link').hover(function(){
                 $('#dachshund').addClass('on');
                 $(document).mousemove(function (e) {
                     $('#dachshund').css({
@@ -158,9 +158,9 @@
                 $(".projectsviewer").addClass('on');
                 var id = $(this).attr('data-id');
                 var project = projectsjs[id];
-                $('.projecttitle').html(project.title+"<br><br>");
-                $('.theask .copy').html(project.ask_html);
-                $('.theanswer .copy').html(project.answer_html);
+               // $('.projecttitle').html(project.title+"<br><br>");
+                // $('.theask .copy').html(project.ask_html);
+                // $('.theanswer .copy').html(project.answer_html);
                 $('.projectdescription .copy').html(project.description_html);
                 console.log(project);
                 let images = JSON.parse(project.images);
@@ -268,13 +268,6 @@
     <div class="left">
         <b>David Jacob Kramer</b><br>
         <b>Creative direction + strategy</b><br><br><br>
-        <div class="menu">
-            <div class="link menu_projects selected" data-target="projectspg">Projects</div>
-            <div class="menuspacer"> &nbsp; &nbsp; </div>
-            <div class="link menu_bio" data-target="biopg">Bio</div>
-            <div class="menuspacer"> &nbsp; &nbsp; </div>
-            <div class="link menu_contact" data-target="contactpg">Contact</div><br>
-        </div>
         <div id="projectspg" class="pg on">
             <div class="thumbpreview">
                 <img src="../images/thumb_spotify.jpg">
@@ -282,15 +275,18 @@
             </div>
             <ul class="projectsholder"></ul>
         </div>
+        <div class="link menu_bio" data-target="biopg">Info</div>
+        <!-- <div class="menuspacer"> &nbsp; &nbsp; </div>
+        <div class="link menu_contact" data-target="contactpg">Contact</div><br> -->
     </div>
 
     <div class="content">
 
         <div id="projectsviewer" class="projectsviewer pg">
-            <div class="projecttitle"></div>
+            <!-- <div class="projecttitle"></div> -->
             <div class="projectimage"></div>
 
-            <div class="theask">
+            <!-- <div class="theask">
                 <h3>The Ask</h3>
                 <div class="copy"></div>
             </div>
@@ -298,10 +294,10 @@
             <div class="theanswer">
                 <h3>The Answer</h3>
                 <div class="copy"></div>
-            </div>
+            </div> -->
             
             <div class="projectdescription">
-                <h3>The Project</h3>
+                <!-- <h3>The Project</h3> -->
                 <div class="copy"></div>
             </div>
 

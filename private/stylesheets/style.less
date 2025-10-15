@@ -27,8 +27,8 @@ body {
     font-family     : "GreyLLWeb-Regular", sans-serif;
     color           : #000;
     background-color: #fff;
-    font-size       : 18px;
-    line-height: 26px;
+    font-size       : 14px;
+    line-height: 18px;
     margin          : 0;
     padding         : 0;
     position: relative;
@@ -36,7 +36,7 @@ body {
     float: left;
 } 
 h6 {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 26px;
     padding: 0 0 0 4px;
     margin: 0;
@@ -45,7 +45,8 @@ h6 {
 } a {
     color: #00f;
 }b {
-    font-weight: 600;
+    // font-weight: 600;
+    font-weight: normal;
 }div, textarea, input, button, ul, li, select, label, form, header{
     padding: 0;
     margin: 0;
@@ -115,8 +116,9 @@ h6 {
         display: block;
         clear  : both;
         margin-bottom: 16px;
+        max-width: 340px;
         p{
-            margin: 12px 0 24px 0;
+            margin: 12px 0 14px 0;
         }
     }
 
@@ -127,10 +129,10 @@ h6 {
     .theask h3, .theanswer h3, .projectdescription h3, .projectmedia h3, .projectcredits h3{
         padding: 0;
         margin: 0;
-        font-weight: bold;
+        // font-weight: bold;
         float: left;
         clear: both;
-        font-size: 18px;
+        font-size: 14px;
         // font-size: 12px;
         line-height: 26px;
         background-color: none !important;
@@ -190,26 +192,35 @@ h6 {
     }
     
     .projectimages {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Creates a 4-column layout */
-        gap: 10px; /* Adjust the space between the grid items */
+        display: block;
+        float: left;
+        width: 100%;
+        max-width: 640px;
+        // display: grid;
+        // grid-template-columns: repeat(4, 1fr); /* Creates a 4-column layout */
+        // gap: 10px; /* Adjust the space between the grid items */
     }.projectthumb {
         width: 100%;
-        aspect-ratio: 1 / .75; /* Makes the cell square */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        margin-top: 12px;
+        // aspect-ratio: 1 / .75; /* Makes the cell square */
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        &:last-child{
+            margin-bottom: 24px;
+        }
         &:hover{
             cursor: pointer;
             //opacity: 0.8;
             img{
-                filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(0deg);
+                // filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(0deg);
             }
         }
     }.projectthumb img {
-        width: 80%;
-        height: 80%;
-        object-fit: contain; /* Ensures the image covers the area, maintaining aspect ratio */
+        // width: 80%;
+        // height: 80%;
+        // object-fit: contain; /* Ensures the image covers the area, maintaining aspect ratio */
+        width: 100%;
     }
 
 }ul li{
@@ -247,7 +258,7 @@ h6 {
     //background-color: #fff;
     padding: 0 4px;
     &.selected{
-        font-weight: 600;
+        // font-weight: 600;
     }&:hover {
         cursor : pointer;
         opacity: 0.5;
@@ -265,10 +276,11 @@ h6 {
     list-style: none;
   //  background-color: #fff;
     width: 100%;
-    padding: 0 16px;
-    height: 26px;
+    padding: 0;
+    height: 18px;//26
     &.selected{
-        font-weight: 600;
+        color: #00f;
+        // font-weight: 600;
     }
     &:hover {
         cursor : pointer;
@@ -300,7 +312,7 @@ h6 {
     display: block;
     float: left;
     padding-right: 16px;
-    padding-bottom: 128px;
+    padding-bottom: 64px;
 }
 
 #projectspg{
