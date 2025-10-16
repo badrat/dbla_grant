@@ -189,11 +189,12 @@
                 let videos = project.video.split(",");
                 console.log(videos);
                 videos.forEach(function(video){
+                    if(video == "") return;
                     //remove space from video
                     video = video.replace(/\s/g, '');
                     //embed vimdeo video using just the id
                     $(".projectvideos").html("");
-                    $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
+                    $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="700" height="394" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
                 });
 
 

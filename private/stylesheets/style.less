@@ -94,7 +94,7 @@ h6 {
         line-height: 52px;
     }.projectdescription{
         width: 100%;
-        max-width: 800px;
+        max-width: 700px;
     }.close{
         display: none;
         position: absolute;
@@ -107,7 +107,7 @@ h6 {
         margin-bottom: 24px;
         img{
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
         }
     }
 
@@ -195,7 +195,7 @@ h6 {
         display: block;
         float: left;
         width: 100%;
-        max-width: 640px;
+        max-width: 700px;
         // display: grid;
         // grid-template-columns: repeat(4, 1fr); /* Creates a 4-column layout */
         // gap: 10px; /* Adjust the space between the grid items */
@@ -279,15 +279,14 @@ h6 {
     padding: 0;
     height: 18px;//26
     &.selected{
-        color: #00f;
-        // font-weight: 600;
+        color: rgb(204, 0, 255);
+        &:hover {
+            opacity: 1;
+        }
     }
     &:hover {
         cursor : pointer;
-    }&.hovered{
-        z-index: 50;
-        color: #000;
-        //mix-blend-mode: exclusion;
+        opacity: 0.5;
     }
 }.menuspacer{
     float: left;
