@@ -188,12 +188,13 @@
                 //let videos be project.videos array parsed by comma separation
                 let videos = project.video.split(",");
                 console.log(videos);
+                $(".projectvideos").html("");
                 videos.forEach(function(video){
                     if(video == "") return;
                     //remove space from video
                     video = video.replace(/\s/g, '');
                     //embed vimdeo video using just the id
-                    $(".projectvideos").html("");
+                    
                     $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="700" height="394" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
                 });
 
