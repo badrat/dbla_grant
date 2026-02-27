@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>David Jacob Kramer</title>
+    <title>Grant Alan Davis</title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="en-US" />
@@ -10,8 +10,8 @@
     <meta name="google" content="notranslate">
     <meta name="thumbnail" content="/images/og_image_1200x630.png" />
     <meta property="og:image" content="/images/og_image_1200x630.png" />
-    <meta property="og:title" content="David Jacob Kramer" />
-    <meta property="og:description" content="Creative direction + strategy " />
+    <meta property="og:title" content="Gran Alan Davis" />
+    <meta property="og:description" content="Films and Projects by Grant Alan Davis" />
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/lodash.min.js"></script>
@@ -21,241 +21,8 @@
 
     <script>
         $(document).ready(function(){
-            console.log("<%= prod %>");
-            var projectsjs = <%- JSON.stringify(projects) %>;
-            console.log(projectsjs);
+            console.log("Grant Alan Davis");
 
-            // loop through projects and append to the ul
-            _.each(projectsjs, function(project, index){
-                console.log(project.title);
-                $('.projectsholder').append('<li class="projectlink" data-id="'+index+'" data-slug="'+project.slug+'">' + project.title + '</li>');
-            });
-
-            //while hovering over .menu, add class 'on' to #daschund
-            $('.menu, .projectlink, .projectthumb, .projectthumb img, .link').hover(function(){
-                $('#dachshund').addClass('on');
-                $(document).mousemove(function (e) {
-                    $('#dachshund').css({
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                });
-            }, function(){
-                $('#dachshund').removeClass('on');
-            });
-
-
-            // populate thumbpreview with boxes of each thumbnail image available   
-            _.each(projectsjs, function(project, index){
-                //create box element for each project with the thumbnail as the background image
-                $('.thumbpreview').append('<div class="box ' + project.slug + '" style="background-image: url(' + project.thumbnail + ')"></div>');
-
-
-                // create random thumbnail_aspect_ratio
-                projectsjs[index].thumbnail_aspect_ratio = Math.random() * 2;
-
-                // check thumbnail aspect ratio
-                if (projectsjs[index].thumbnail_aspect_ratio > 1) {
-                    // adjust this specific box
-                    $('.' + project.slug).addClass('horizontal');
-                    $('.' + project.slug).removeClass('vertical');
-                } else {
-                    // adjust this specific box
-                    $('.' + project.slug).addClass('vertical');
-                    $('.' + project.slug).removeClass('horizontal');
-                }
-
-                $('.' + project.slug).css({
-                    'backgroundImage': 'url(' + project.thumbnail + ')'
-                });
-            });
-
-
-            //when hovering over a projectlink, show the thumbpreview
-
-            $('.projectlink').hover(function () {
-                $('.thumbpreview').addClass('on');
-                $(this).addClass("hovered");
-                var dataid = $(this).attr('data-id');
-                var dataslug = $(this).attr('data-slug');
-                var thumbScale = $('#thumbScale').val();
-                var thumbWidth = thumbScale;
-                var thumbHeight = thumbScale*.768;
-
-                // create random thumbnail_aspect_ratio
-                projectsjs[dataid].thumbnail_aspect_ratio = Math.random() * 2;
-
-                // check thumbnail aspect ratio
-                if (projectsjs[dataid].thumbnail_aspect_ratio > 1) {
-                    $('.box').addClass('horizontal');
-                    $('.box').removeClass('vertical');
-                } else {
-                    $('.box').addClass('vertical');
-                    $('.box').removeClass('horizontal');
-                }
-
-                $(".box").removeClass("top");
-                $("." + dataslug).addClass('on');
-                $("." + dataslug).addClass('top');
-
-                $(document).mousemove(function (e) {
-
-                    var halfWidth = thumbScale / 2;
-                    var halfHeight = thumbHeight / 2;
-
-                    // $('.thumbpreview').css({
-                    //     left: e.pageX,
-                    //     top: e.pageY,
-                    //     'width': thumbWidth + 'vw',
-                    //     'height': thumbHeight + 'vw'
-                    // });
-
-                    $('.thumbpreview').css({
-                        //left: (e.clientX - halfWidth) + 'px',  // Changed to clientX and adjust for half the width
-                        //left: -256 + e.clientX + 'px',
-                        left: "300px",
-                        top: (e.clientY - halfHeight) + 'px',  // Changed to clientY and adjust for half the height
-                        'width': thumbWidth + 'vw',
-                        'height': thumbHeight + 'vw'
-                    });
-
-
-
-                });
-            }, function () {
-                var dataid = parseInt($(this).attr('data-id'));
-                var dataslug = parseInt($(this).attr('data-slug'));
-                $('.projectlink').removeClass("hovered");
-                $('.thumbpreview').removeClass('on');
-                $('.box').removeClass('on');
-                console.log("mouseout");
-
-
-                // give .box a random class of either 'horizontal' or 'vertical'
-                var random = Math.floor(Math.random()*2);
-                if (random == 0) {
-                    $('.box').addClass('horizontal');
-                    $('.box').removeClass('vertical');
-                } else {
-                    $('.box').addClass('vertical');
-                    $('.box').removeClass('horizontal');
-                }
-
-                
-
-            });
-
-            //when a slider in the editor is moved, the relevant readout should so its value
-            $('.slider').on('input', function(){
-                var value = $(this).val();
-                $(this).next('.readout').html(value);
-            });
-
-            //when clicking on a project, show the project details
-            $('.projectlink').click(function(){
-                console.log("clicked");
-                $(".projectlink").removeClass('selected');
-                $(".projectsviewer").addClass('on');
-                var id = $(this).attr('data-id');
-                var project = projectsjs[id];
-               // $('.projecttitle').html(project.title+"<br><br>");
-                // $('.theask .copy').html(project.ask_html);
-                // $('.theanswer .copy').html(project.answer_html);
-                $('.projectdescription .copy').html(project.description_html);
-                console.log(project);
-                let images = JSON.parse(project.images);
-                console.log(images);
-                $(".projectimages").html("");
-                $(".projectimage").html("");
-                images.forEach(function(image){
-                    console.log(image);
-                    // if it's the first image, show it as the main image
-                    if (image.s1600 == images[0].s1600) {
-                        if (image.format == "image/gif") {
-                            $('.projectimage').append('<img src="' + image.url + '">');
-                        }else{
-                            $('.projectimage').append('<img src="' + image.s1600 + '">');
-                        }
-                    }else{
-                        if(image.format == "image/gif"){
-                            $(".projectimages").append('<div class="projectthumb"><img src="' + image.url + '"></div>');
-                        }else{
-                            $(".projectimages").append('<div class="projectthumb"><img src="' + image.s1600 + '"></div>');
-                        }
-                    } 
-                });
-
-                //let videos be project.videos array parsed by comma separation
-                let videos = project.video.split(",");
-                console.log(videos);
-                $(".projectvideos").html("");
-                videos.forEach(function(video){
-                    if(video == "") return;
-                    //remove space from video
-                    video = video.replace(/\s/g, '');
-                    //embed vimdeo video using just the id
-                    
-                    $(".projectvideos").append('<iframe src="https://player.vimeo.com/video/' + video + '" width="700" height="394" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>');
-                });
-
-
-
-                $(this).addClass('selected');
-            });
-
-            //when clicking a .link, show the corresponding page
-            $('.link').click(function(){
-                var target = $(this).attr('data-target');
-                console.log(target);
-                $('.pg').removeClass('on');
-                $('#' + target).addClass('on');
-                $('.link').removeClass('selected');
-                $(this).addClass('selected');
-            });
-
-            //when clicking on a dynamically generated projecthumb image, show it in the viewer
-            $(document).on('click', '.projectthumb', function(){
-                console.log("clicked");
-                var src = $(this).find('img').attr('src');
-                console.log(src);
-                $('.viewer').html('<img src="' + src + '">');
-                $('.viewer').addClass('on');
-            });
-
-            $(document).on('click', '.viewer', function(){
-                $('.viewer').removeClass('on');
-                $('.viewer').empty();
-            });
-
-            //listen to fontSize slider, and change the font size of eeverything accordingly as it slides
-            $('#fontSize').on('input', function(){
-                var value = $(this).val();
-                $('.content').css('font-size', value + 'px');
-
-                //calculate line-height as 120% of font-size, but round up to the nearest whole number
-                var lineHeight = Math.ceil(value * 1.2);
-                $('.content').css('line-height', lineHeight + 'px');
-
-
-            });
-
-            //sync projectThumbWidth slider with the width of .projectthumb
-            $('#projectThumbWidth').on('input', function(){
-                var value = $(this).val();
-                $('.projectthumb').css('width', value + '%');
-            });
-
-            //use panelwidth to determine width of projectspg and projectsviewer
-            // $('#panelWidth').on('input', function(){
-            //     var value = $(this).val();
-            //     var width = value + '%';
-            //     console.log(width);
-            //     let projectspgwidth = "calc(" + width + "%" + " - 64px)";
-            //     console.log(projectspgwidth);
-            //     $('.pg').css('width',  value + '%');
-            //     $('.projectsviewer').css('width', (100 - value) + '%');
-            //     $('.projectsviewer').css('left', value + '%');
-            // });
 
         });
     </script>
@@ -265,22 +32,9 @@
 
     <div class="viewer"></div>
 
-    <div id="dachshund"></div>
 
     <div class="left">
-        <b>David Jacob Kramer</b><br>
-        <b>Creative direction + strategy</b><br><br><br>
-        <div id="projectspg" class="pg on">
-            <div class="thumbpreview">
-                <img src="../images/thumb_spotify.jpg">
-                <div class="box"></div>
-            </div>
-            <ul class="projectsholder"></ul>
-        </div>
-        <div class="link menu_bio" data-target="biopg">Info</div>
-        <!-- <div class="menuspacer"> &nbsp; &nbsp; </div>
-        <div class="link menu_contact" data-target="contactpg">Contact</div><br> -->
-    </div>
+        <b>Grant Alan Davis</b><br>
 
     <div class="content">
 
@@ -288,15 +42,7 @@
             <!-- <div class="projecttitle"></div> -->
             <div class="projectimage"></div>
 
-            <!-- <div class="theask">
-                <h3>The Ask</h3>
-                <div class="copy"></div>
-            </div>
-
-            <div class="theanswer">
-                <h3>The Answer</h3>
-                <div class="copy"></div>
-            </div> -->
+          
             
             <div class="projectdescription">
                 <!-- <h3>The Project</h3> -->
@@ -304,9 +50,7 @@
             </div>
 
 
-            <!-- <div class="projectmedia">
-                <h3>Media</h3>
-            </div> -->
+       
 
             <div class="projectvideos"></div>
 
@@ -322,33 +66,7 @@
         <div id="biopg" class="pg">
             <div class="text">
                 <p>
-                    Creative director / strategist working with global brands and local communities. Co-founder and creative director of
-                    Imprint Projects for 12 years — developed purpose-driven brand behaviors for companies like Google, Lego, Uniqlo,
-                    Levi’s, Sonos, Spotify, Soundcloud, and Vans, and nonprofits like The Bill & Melinda Gates Foundation and The Museum of
-                    Modern Art.
-                </p>
-
-                <p>
-                    Multi-year platforms and integrated campaigns combined in-person experiences and digital content for global impact.
-                    Pioneers in building credible brand communities, our work championed by AdAge (Best Small Agency, Best Agency Culture,
-                    Best Experiential Agency), The Drum (Experience Agency of the Year, Brand Activation of the Year), D&AD (Wood Pencil for
-                    Branded Documentary), Digiday (Finalist Best Community Building Campaign, Finalist Most Innovative Independent Agency),
-                    and Campaign US BIG (Experiential Excellence).
-                </p>
-
-                <p>
-                    Also founded the bookstore, Family, in Los Angeles, that ran for 15 years, specializing in artists' books, zines, and
-                    artist events. Write about art and culture for GQ, the Believer, as a guest editor for Paper Magazine, and authored the
-                    book Heads Together: Weed and the Underground Press Syndicate, 1965-1973 (Edition Patrick Frey).
-                </p>
-
-                <p>
-                    More about Imprint Projects:
-                    "Imprint Projects' mission was to replace advertising with cultural production and dialogue.
-                    When businesses invite participation at the intersection of commerce and culture, we were able to transform brand
-                    perception in ways that is simply not possible with traditional advertising. We built connections with diverse creative
-                    communities, fostering relationships, and sparking conversations. Our approach balanced short-term business objectives
-                    with long-term brand equity."
+                    etc
                 </p>
             </div>
         </div>
@@ -357,42 +75,7 @@
             <div class="text"></div>
         </div>
         
-        <br><br>
-        
-
-        
-
-        <div class="editor">
-            <ul>
-                <li>
-                    <label for="thumbScale">Thumb Scale</label>
-                    <input type="range" min="10" max="100" value="70" class="slider" id="thumbScale">
-                    <div class="readout"></div>
-                </li>
-                <li>
-                    <label for="panelWidth">Panel Width</label>
-                    <input type="range" min="10" max="100" value="50" class="slider" id="panelWidth">
-                    <div class="readout"></div>
-                </li>
-                <li>
-                    <label for="fontSize">Font</label>
-                    <input type="range" min="8" max="128" value="24" class="slider" id="fontSize">
-                    <div class="readout"></div>
-                </li>
-                <li>
-                    <label for="projectThumbWidth">Project Images</label>
-                    <input type="range" min="10" max="100" value="25" class="slider" id="projectThumbWidth">
-                    <div class="readout"></div>
-                </li>
-                <li>
-
-                </li>
-            </ul>
-            <!-- a slider for percentage size of thumbnail, min 10% max 100%-->
-            
-        </div>
-
-
+     
         <% projects.forEach(function(project) { %>
         <li>
             <a href="<%= project.slug %>">

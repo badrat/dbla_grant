@@ -1,5 +1,5 @@
 {
-  "client": "David",
+  "client": "Grant",
   "schema": {
     "contact": {
       "et": "s",
@@ -79,22 +79,6 @@
           "o": "10",
           "show": 1,
           "width": "15%"
-        },
-        "ask": {
-          "kind": "richtext",
-          "o": "20"
-        },
-        "ask_html": {
-          "kind": "hidden",
-          "o": "20"
-        },
-        "answer": {
-          "kind": "richtext",
-          "o": "30"
-        },
-        "answer_html": {
-          "kind": "hidden",
-          "o": "30"
         },
         "description": {
           "kind": "richtext",
