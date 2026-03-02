@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title || 'Project' %></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="en-US" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="thumbnail" content="<%= metaThumbnail || '/images/og_image_1200x630.png' %>" />
+    <meta property="og:image" content="<%= metaThumbnail || '/images/og_image_1200x630.png' %>" />
+    <meta property="og:title" content="<%= title || 'Project' %>" />
+    <meta property="og:description" content="Films and Projects by Grant Alan Davis" />
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/lodash.min.js"></script>
+    <script src="/javascripts/moment.min.js"></script>
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/site.js"></script>
+</head>
+<body>
+    <%- include('_header') %>
+    <div class="page-shell">
+        <h1 class="projects-title"><%= project.title %></h1>
+        <img class="project-main-image" src="<%= project.thumbnail %>" alt="<%= project.title %> Thumbnail">
+        <p><%- project.description_html || project.description || '' %></p>
+        <p><strong>Year:</strong> <%= project.year %></p>
+
+        <% if (project.gallery_images && project.gallery_images.length) { %>
+        <div>
+            <div class="gallery-grid">
+                <% project.gallery_images.forEach(function(image, imageIndex) { %>
+                    <% var imageSrc = (typeof image === 'string' ? image : (image && (image.url || image.s1600 || image.s800 || image.s128) || '')); %>
+                    <img class="gallery-thumb" src="<%= imageSrc %>" data-full-src="<%= imageSrc %>" data-gallery-id="0" data-gallery-index="<%= imageIndex %>" alt="Gallery Image">
+                <% }); %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-frame">
+            <img id="imageModalImg" src="" alt="Expanded Gallery Image" />
+            <button type="button" class="modal-nav modal-nav-left" id="modalNavLeft" aria-label="Previous image">◀</button>
+            <button type="button" class="modal-nav modal-nav-right" id="modalNavRight" aria-label="Next image">▶</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var $modal = $('#imageModal');
+            var $modalImg = $('#imageModalImg');
+            var $modalFrame = $('.image-modal-frame');
+            var $navLeft = $('#modalNavLeft');
+            var $navRight = $('#modalNavRight');
+            var currentGallery = [];
+            var currentIndex = 0;
+
+            function normalizeIndex(index, length) {
+                if (!length) return 0;
+                var next = index % length;
+                return next < 0 ? next + length : next;
+            }
+
+            function renderCurrentImage() {
+                if (!currentGallery.length) return;
+                currentIndex = normalizeIndex(currentIndex, currentGallery.length);
+                $modalImg.attr('src', currentGallery[currentIndex]);
+            }
+
+            function setActiveGallery(galleryId, galleryIndex) {
+                var selector = '.gallery-thumb[data-gallery-id="' + galleryId + '"]';
+                currentGallery = $(selector).map(function () {
+                    return $(this).attr('data-full-src') || $(this).attr('src');
+                }).get().filter(Boolean);
+                currentIndex = normalizeIndex(parseInt(galleryIndex, 10) || 0, currentGallery.length);
+                renderCurrentImage();
+            }
+
+            $(document).on('click', '.gallery-thumb', function () {
+                var src = $(this).attr('data-full-src') || $(this).attr('src');
+                if (!src) return;
+                var galleryId = $(this).attr('data-gallery-id');
+                var galleryIndex = $(this).attr('data-gallery-index');
+                setActiveGallery(galleryId, galleryIndex);
+                $modal.addClass('on');
+            });
+
+            $navLeft.on('click', function (e) {
+                e.stopPropagation();
+                currentIndex -= 1;
+                renderCurrentImage();
+            });
+
+            $navRight.on('click', function (e) {
+                e.stopPropagation();
+                currentIndex += 1;
+                renderCurrentImage();
+            });
+
+            $modalFrame.on('mousemove', function (e) {
+                var rect = this.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var leftZone = x <= 64;
+                var rightZone = x >= (rect.width - 64);
+
+                $navLeft.toggleClass('show', leftZone);
+                $navRight.toggleClass('show', rightZone);
+            });
+
+            $modalFrame.on('mouseleave', function () {
+                $navLeft.removeClass('show');
+                $navRight.removeClass('show');
+            });
+
+            $modal.on('click', function (e) {
+                if (e.target === this) {
+                    $modal.removeClass('on');
+                    $modalImg.attr('src', '');
+                    currentGallery = [];
+                    currentIndex = 0;
+                }
+            });
+
+            $(document).on('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    $modal.removeClass('on');
+                    $modalImg.attr('src', '');
+                    currentGallery = [];
+                    currentIndex = 0;
+                }
+
+                if (!$modal.hasClass('on')) return;
+
+                if (e.key === 'ArrowLeft') {
+                    currentIndex -= 1;
+                    renderCurrentImage();
+                }
+
+                if (e.key === 'ArrowRight') {
+                    currentIndex += 1;
+                    renderCurrentImage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

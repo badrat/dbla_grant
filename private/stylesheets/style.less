@@ -231,25 +231,17 @@ h6 {
 
 }ul li{
     list-style: none;
-}#dachshund{
-    //display: none;
-    opacity: 0;
-    width: 55px;
-    height: 28px;
-    position: absolute;
-    background-image: url('../images/dachshund.gif');
-    background-size: 39px 28px; //78px 56px
-    background-position: center right;
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
-    pointer-events: none;
-    z-index: 100;
-    transition: opacity .1s;
-    &.on{
-        //display: block;
-        opacity: 1;
-    }
-}.editor{
+}
+
+
+.homelink {
+
+    text-decoration: none;
+    color          : #000;
+
+}
+
+.editor{
     display: none;
 }.menu{
     display: block;
@@ -334,9 +326,19 @@ h6 {
     left: 32px;
 }
 
+.left:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .menu-link {
     color: #00f;
     text-decoration: none;
+    display: block;
+    float: left; 
+    clear: both;
+    margin: 6px 0 8px 0;
 }
 
 .menu-link:hover {
@@ -345,6 +347,18 @@ h6 {
 
 .menu-link.selected {
     color: #555;
+}
+
+.project-submenu {
+    float: left;
+    clear: both;
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding-left: 16px;
+}
+
+.project-submenu .menu-link {
+    display: block;
 }
 
 
@@ -437,7 +451,7 @@ h6 {
 }
 
 .page-shell {
-    padding-top: 100px;
+    padding-top: 20px;
     padding-left: 32px;
     padding-right: 32px;
     margin-left: 420px;
@@ -450,12 +464,42 @@ h6 {
     margin-top: 64px;
     li{
         float: left;
-        margin: 32px 0;
+        margin: 16px 24px 16px 0;
     }
 }
 
+.projects-list-item-title {
+    margin: 8px 0 0 0;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+}
+
+.projects-list-item-link {
+    text-decoration: none;
+}
+
+.projects-list-item-link:hover {
+    text-decoration: underline;
+}
+
+.projects-list-thumb-link {
+    display: inline-block;
+}
+
+.projects-list-thumb {
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 .projects-title {
-    color: #555;
+    // color: #555;
+    color: #000;
+    font-size: 20px;
+    line-height: 18px;
+    margin-bottom: 61px;
 }
 
 .project-main-image {
@@ -468,6 +512,7 @@ h6 {
 
 .gallery-grid {
     margin-top: 12px;
+    margin-bottom: 128px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -556,7 +601,17 @@ h6 {
         left: auto !important;
         width: 100% !important;
         height: auto !important;
-        padding: 16px 16px 0 16px;
+        padding: 16px 16px 12px 16px;
+    }
+
+    .menu-link {
+        float: none;
+        clear: none;
+    }
+
+    .project-submenu {
+        float: none;
+        clear: none;
     }
 
     .content {

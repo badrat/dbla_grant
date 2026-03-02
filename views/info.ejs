@@ -20,7 +20,7 @@
 <body>
     <%- include('_header') %>
     <div class="page-shell">
-    <h1><%= bio.title || 'Info' %></h1>
+    <h1 class="projects-title"><%= bio.title || 'Info' %></h1>
     <% if (bio.pic) { %>
     <img src="<%= bio.pic %>" alt="Bio Picture">
     <% } %>

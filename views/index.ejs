@@ -22,8 +22,6 @@
     <script>
         $(document).ready(function(){
             console.log("Grant Alan Davis");
-
-
         });
     </script>
 </head>    
@@ -40,17 +38,10 @@
         <div id="projectsviewer" class="projectsviewer pg">
             <!-- <div class="projecttitle"></div> -->
             <div class="projectimage"></div>
-
-          
-            
             <div class="projectdescription">
                 <!-- <h3>The Project</h3> -->
                 <div class="copy"></div>
             </div>
-
-
-       
-
             <div class="projectvideos"></div>
 
             <div class="projectimages"></div>
@@ -77,8 +68,8 @@
      
         <% projects.forEach(function(project) { %>
         <li>
-            <a href="<%= project.slug %>">
-                <div class="gblock" style="background-image: url(<%= project.thumbnail %>)"></div>
+            <a href="<%= project.project_path %>">
+                <div class="gblock" style="background-image: url('<%= project.thumbnail %>')"></div>
                 
             </a>
         </li>

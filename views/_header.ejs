@@ -1,6 +1,19 @@
 <div class="left">
-    <b>Grant Alan Davis</b><br><br>
+    <b><a href="/" class="homelink">Grant Alan Davis</a></b><br><br><br><br>
     <a class="menu-link <%= currentPage === 'projects' ? 'selected' : '' %>" href="/projects">Projects</a>
-    •
+    <% if (currentPage === 'projects' && projectMenuItems && projectMenuItems.length) { %>
+    &nbsp;<br>
+    <div class="project-submenu">
+        <% projectMenuItems.forEach(function (projectMenuItem) { %>
+            <a
+                class="menu-link <%= currentProjectSlug === projectMenuItem.slug_segment ? 'selected' : '' %>"
+                href="<%= projectMenuItem.project_path %>">
+                <%= projectMenuItem.title %>
+            </a>
+        <% }); %>
+    </div>
+    <% } %>
     <a class="menu-link <%= currentPage === 'info' ? 'selected' : '' %>" href="/info">Info</a>
+    &nbsp;<br>
+    
 </div>
