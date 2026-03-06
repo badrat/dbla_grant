@@ -1,7 +1,7 @@
 <div class="left">
-    <b><a href="/" class="homelink">Grant Alan Davis</a></b><br><br><br><br>
-    <a class="menu-link <%= currentPage === 'projects' ? 'selected' : '' %>" href="/projects">Projects</a>
-    <% if (currentPage === 'projects' && projectMenuItems && projectMenuItems.length) { %>
+    <b><a href="/" class="homelink">Grant Alan Davis</a></b><br><br><br>
+    <!-- <a class="menu-link menu-link-projects <%= currentPage === 'projects' ? 'selected' : '' %>" href="/projects">Projects</a> -->
+    <% if (projectMenuItems && projectMenuItems.length) { %>
     &nbsp;<br>
     <div class="project-submenu">
         <% projectMenuItems.forEach(function (projectMenuItem) { %>
@@ -13,6 +13,7 @@
         <% }); %>
     </div>
     <% } %>
+    <a class="menu-link <%= currentPage === 'links' ? 'selected' : '' %>" href="/links">Links</a>
     <a class="menu-link <%= currentPage === 'info' ? 'selected' : '' %>" href="/info">Info</a>
     &nbsp;<br>
     

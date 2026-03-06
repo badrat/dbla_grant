@@ -68,12 +68,18 @@ function normalizeProject(project) {
     });
 }
 
+// Load project menu items for sidebar on every request
+router.use(function (req, res, next) {
+    knex('projects').select('*').orderBy('order', 'asc').then(function (projects) {
+        res.locals.projectMenuItems = projects.map(normalizeProject);
+        next();
+    }).catch(next);
+});
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    knex('projects').select('*').orderBy('order', 'asc').then(function (projects) {
-        var normalizedProjects = projects.map(normalizeProject);
-        res.render('index', { title: 'Home', prod: prod, projects: normalizedProjects, currentPage: 'home' });
-    }).catch(next);
+    var normalizedProjects = res.locals.projectMenuItems || [];
+    res.render('index', { title: 'Home', prod: prod, projects: normalizedProjects, currentPage: 'home', currentProjectSlug: '' });
 });
 
 router.get('/route/:slug', function (req, res, next) {
@@ -82,6 +88,16 @@ router.get('/route/:slug', function (req, res, next) {
     knex('table').select('*').where('slug', routeslug).then(function (resp) {
         results = resp[0];
         res.render('template', { title: title, results: results });
+    });
+});
+
+// Route for /links
+router.get('/links', function (req, res, next) {
+    res.render('links', {
+        title: 'Links',
+        prod: prod,
+        currentPage: 'links',
+        currentProjectSlug: ''
     });
 });
 
@@ -99,62 +115,57 @@ router.get('/info', function (req, res, next) {
             bio: bio,
             contact: contact,
             prod: prod,
-            currentPage: 'info'
+            currentPage: 'info',
+            currentProjectSlug: ''
         });
     }).catch(next);
 });
 
 // Route for /projects
 router.get('/projects', function (req, res, next) {
-    knex('projects').select('*').orderBy('order', 'asc').then(function (projects) {
-        var normalizedProjects = projects.map(normalizeProject);
+    var normalizedProjects = res.locals.projectMenuItems || [];
+    // Debug output for gallery shape
+    console.log('Projects gallery payload sample (JSON):', JSON.stringify(normalizedProjects.map(function (p) {
+        return {
+            id: p.id,
+            title: p.title,
+            images_raw: p.images,
+            gallery_images: p.gallery_images
+        };
+    }), null, 2));
 
-        // Debug output for gallery shape
-        console.log('Projects gallery payload sample (JSON):', JSON.stringify(normalizedProjects.map(function (p) {
-            return {
-                id: p.id,
-                title: p.title,
-                images_raw: p.images,
-                gallery_images: p.gallery_images
-            };
-        }), null, 2));
-
-        res.render('projects', {
-            title: 'Projects',
-            prod: prod,
-            currentPage: 'projects',
-            projects: normalizedProjects,
-            projectMenuItems: normalizedProjects,
-            currentProjectSlug: '',
-            metaThumbnail: DEFAULT_META_IMAGE
-        });
-    }).catch(next);
+    res.render('projects', {
+        title: 'Projects',
+        prod: prod,
+        currentPage: 'projects',
+        projects: normalizedProjects,
+        projectMenuItems: normalizedProjects,
+        currentProjectSlug: '',
+        metaThumbnail: DEFAULT_META_IMAGE
+    });
 });
 
 // Route for /project/:projectSlug
 router.get('/project/:projectSlug', function (req, res, next) {
     var requestedSlug = normalizeProjectSlug(req.params.projectSlug, '');
+    var normalizedProjects = res.locals.projectMenuItems || [];
+    var project = normalizedProjects.find(function (item) {
+        return item.slug_segment === requestedSlug;
+    });
 
-    knex('projects').select('*').orderBy('order', 'asc').then(function (projects) {
-        var normalizedProjects = projects.map(normalizeProject);
-        var project = normalizedProjects.find(function (item) {
-            return item.slug_segment === requestedSlug;
-        });
+    if (!project) {
+        return res.status(404).render('error');
+    }
 
-        if (!project) {
-            return res.status(404).render('error');
-        }
-
-        res.render('project', {
-            title: project.title || 'Project',
-            prod: prod,
-            currentPage: 'projects',
-            currentProjectSlug: project.slug_segment,
-            projectMenuItems: normalizedProjects,
-            project: project,
-            metaThumbnail: project.thumbnail || DEFAULT_META_IMAGE
-        });
-    }).catch(next);
+    res.render('project', {
+        title: project.title || 'Project',
+        prod: prod,
+        currentPage: 'projects',
+        currentProjectSlug: project.slug_segment,
+        projectMenuItems: normalizedProjects,
+        project: project,
+        metaThumbnail: project.thumbnail || DEFAULT_META_IMAGE
+    });
 });
 
 module.exports = router;

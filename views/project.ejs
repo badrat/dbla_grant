@@ -22,6 +22,7 @@
     <div class="page-shell">
         <h1 class="projects-title"><%= project.title %></h1>
         <img class="project-main-image" src="<%= project.thumbnail %>" alt="<%= project.title %> Thumbnail">
+        <div class="project-content">
         <p><%- project.description_html || project.description || '' %></p>
         <p><strong>Year:</strong> <%= project.year %></p>
 
@@ -35,6 +36,7 @@
             </div>
         </div>
         <% } %>
+        </div>
     </div>
 
     <div class="image-modal" id="imageModal">
