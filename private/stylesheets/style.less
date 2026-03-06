@@ -527,6 +527,7 @@ h6 {
 
 .project-content {
     max-width: 800px;
+    padding-right: 64px;
 }
 
 .gallery-grid {
@@ -631,6 +632,20 @@ h6 {
 }
 
 @media (max-width: 900px) {
+    body{
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .projects-title{
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 16px;
+    }
+    .project-content{
+        padding-right: 32px;
+        padding-bottom: 128px;
+    }
+
     .left {
         position: static !important;
         top: auto !important;
@@ -661,7 +676,7 @@ h6 {
 
     .page-shell {
         margin-left: 0 !important;
-        padding-top: 24px;
+        padding-top: 0;
         padding-left: 16px;
         padding-right: 16px;
     }
@@ -675,9 +690,13 @@ h6 {
         max-width: 100%;
     }
 
+    .gallery-grid{
+        margin-top: 32px;
+    }
+
     .gallery-thumb {
-        width: 104px;
-        height: 104px;
+        width: 98px;
+        height: 98px;
     }
 
     .image-modal {
