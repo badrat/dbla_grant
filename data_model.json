@@ -50,6 +50,27 @@
         }
       }
     },
+    "site_data": {
+      "et": "s",
+      "id": "site_data",
+      "properties": {
+        "id": {
+          "kind": "hidden"
+        },
+        "links": {
+          "kind": "repeatable",
+          "o": "2",
+          "options": {
+              "link_name": {
+                  "kind": "text"
+              },
+              "link_url": {
+                  "kind": "text"
+              }
+          }
+        }
+      }
+    },
     "projects": {
       "default_sort": "order",
       "et": "m",
@@ -67,6 +88,11 @@
         "thumbnail_text": {
           "kind": "longtext",
           "o": "7"
+        },
+        "mp4_video": {
+          "kind": "file",
+          "note": "Upload an MP4 video here. This will be used as the thumbnail on the project page if it exists.",
+          "o": "6"
         },
         "title": {
           "kind": "page_title",

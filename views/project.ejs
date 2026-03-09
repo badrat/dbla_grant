@@ -12,6 +12,8 @@
     <meta property="og:description" content="Films and Projects by Grant Alan Davis" />
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="<%= siteFavicon || '/images/og_image_1200x630.png' %>">
+    <link rel="shortcut icon" href="<%= siteFavicon || '/images/og_image_1200x630.png' %>">
     <script src="/javascripts/lodash.min.js"></script>
     <script src="/javascripts/moment.min.js"></script>
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
@@ -20,11 +22,16 @@
 <body>
     <%- include('_header') %>
     <div class="page-shell">
-        <h1 class="projects-title"><%= project.title %></h1>
+        <h1 class="projects-title"><%= project.title %><% if (project.year) { %>, <%= project.year %><% } %></h1>
+        <% if (project.mp4_video_url) { %>
+        <video class="project-main-video" autoplay muted loop playsinline preload="metadata" aria-label="<%= project.title %> Video">
+            <source src="<%= project.mp4_video_url %>" type="video/mp4">
+        </video>
+        <% } else { %>
         <img class="project-main-image" src="<%= project.thumbnail %>" alt="<%= project.title %> Thumbnail">
+        <% } %>
         <div class="project-content">
         <p><%- project.description_html || project.description || '' %></p>
-        <p><strong>Year:</strong> <%= project.year %></p>
 
         <% if (project.gallery_images && project.gallery_images.length) { %>
         <div>

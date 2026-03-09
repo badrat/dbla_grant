@@ -34,6 +34,35 @@ function pickImageUrl(imageValue) {
     return '';
 }
 
+function pickFileUrl(fileValue) {
+    if (!fileValue) return '';
+
+    if (typeof fileValue === 'string') {
+        var trimmed = fileValue.trim();
+        if (!trimmed) return '';
+
+        if ((trimmed[0] === '{' && trimmed[trimmed.length - 1] === '}') || (trimmed[0] === '[' && trimmed[trimmed.length - 1] === ']')) {
+            try {
+                return pickFileUrl(JSON.parse(trimmed));
+            } catch (e) {
+                return trimmed;
+            }
+        }
+
+        return trimmed;
+    }
+
+    if (Array.isArray(fileValue)) {
+        return pickFileUrl(fileValue[0]);
+    }
+
+    if (typeof fileValue === 'object') {
+        return fileValue.url || fileValue.path || fileValue.src || fileValue.s1600 || fileValue.s800 || fileValue.s128 || '';
+    }
+
+    return '';
+}
+
 function slugifyText(value) {
     return String(value || '')
         .toLowerCase()
@@ -63,6 +92,7 @@ function normalizeProject(project) {
 
     return Object.assign({}, project, {
         gallery_images: galleryImages,
+        mp4_video_url: pickFileUrl(project.mp4_video),
         slug_segment: slugSegment,
         project_path: '/project/' + slugSegment
     });
@@ -70,8 +100,15 @@ function normalizeProject(project) {
 
 // Load project menu items for sidebar on every request
 router.use(function (req, res, next) {
-    knex('projects').select('*').orderBy('order', 'asc').then(function (projects) {
+    Promise.all([
+        knex('projects').select('*').orderBy('order', 'asc'),
+        knex('bio').select('*').first()
+    ]).then(function (results) {
+        var projects = results[0] || [];
+        var bio = results[1] || {};
+
         res.locals.projectMenuItems = projects.map(normalizeProject);
+        res.locals.siteFavicon = bio.pic || DEFAULT_META_IMAGE;
         next();
     }).catch(next);
 });
@@ -93,12 +130,25 @@ router.get('/route/:slug', function (req, res, next) {
 
 // Route for /links
 router.get('/links', function (req, res, next) {
-    res.render('links', {
-        title: 'Links',
-        prod: prod,
-        currentPage: 'links',
-        currentProjectSlug: ''
-    });
+    knex('site_data').select('*').first().then(function (siteData) {
+        var rawLinks = parseJsonArray(siteData && siteData.links);
+        var links = rawLinks.map(function (item) {
+            return {
+                link_name: item && item.link_name ? String(item.link_name).trim() : '',
+                link_url: item && item.link_url ? String(item.link_url).trim() : ''
+            };
+        }).filter(function (item) {
+            return item.link_name && item.link_url;
+        });
+
+        res.render('links', {
+            title: 'Links',
+            prod: prod,
+            currentPage: 'links',
+            currentProjectSlug: '',
+            links: links
+        });
+    }).catch(next);
 });
 
 // Route for /info

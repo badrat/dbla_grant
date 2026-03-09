@@ -498,7 +498,7 @@ h6 {
     display: block;
     width: 250px;
     max-width: 100%;
-    aspect-ratio: 1.78 / 1;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
 }
 
@@ -525,6 +525,16 @@ h6 {
     margin-bottom: 12px;
 }
 
+.project-main-video {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin-bottom: 12px;
+    background: #000;
+    object-fit: cover;
+}
+
 .project-content {
     max-width: 800px;
     padding-right: 64px;
@@ -540,7 +550,7 @@ h6 {
 
 .gallery-thumb {
     width: 140px;
-    height: 140px;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     cursor: pointer;
     border-top: 2px solid #f4f4f4;
@@ -631,6 +641,32 @@ h6 {
     }
 }
 
+.links-list-container {
+    margin-top: -1px;
+}
+
+.links-list-item {
+    display: block;
+    margin: 0 0 13px 0;
+}
+
+.links-list-link {
+    color: #00f;
+    text-decoration: none;
+}
+
+.links-list-link:hover {
+    text-decoration: underline;
+}
+
+.links-list-container a {
+    text-decoration: none;
+}
+
+.links-list-container a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 900px) {
     body{
         font-size: 16px;
@@ -690,13 +726,17 @@ h6 {
         max-width: 100%;
     }
 
+    .project-main-video {
+        max-width: 100%;
+    }
+
     .gallery-grid{
         margin-top: 32px;
     }
 
     .gallery-thumb {
         width: 98px;
-        height: 98px;
+        aspect-ratio: 16 / 9;
     }
 
     .image-modal {
